@@ -7,7 +7,7 @@ class GitLabRepository < ActiveRecord::Base
   attr_protected :url, :project
   acts_as_event datetime: :created_at,
                 title: ->(r) { "Gitlab Plugin - #{r.title}" },
-                url: -> (r) { { controller: "git_lab_repositories", action: "index", project_id: r.project.id } }
+                url: ->(r) { { controller: "git_lab_repositories", action: "index", project_id: r.project.id } }
   acts_as_activity_provider permission: nil,
                             timestamp: :created_at,
                             find_options: { include: :project },
